@@ -8,7 +8,6 @@ import {
     Checkbox,
     IconButton,
     TextField,
-    InputAdornment,
     Paper,
     styled,
     Typography,
@@ -112,25 +111,6 @@ const TodoList = () => {
                     ),
                 }}
             />
-
-
-            {/* <TodoInput dir={i18n.language === "ar" ? "rtl" : "ltr"}
-                label={editingTodo ? t('edit') : t('toDo')}
-                variant="outlined"
-                value={inputText}
-                rules={{ required: 'Todo text is required' }}
-                onChange={(e) => setInputText(e.target.value)}
-                onKeyDown={handleKeyPress}
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="end" dir={i18n.language === "ar" ? "rtl" : "ltr"} >
-                            <IconButton onClick={editingTodo ? handleUpdate : handleAddTodo}>
-                                {editingTodo ? <EditIcon /> : <AddIcon />}
-                            </IconButton>
-                        </InputAdornment>
-                    ),
-                }}
-            /> */}
 
             <List dir={i18n.language === "ar" ? "rtl" : "ltr"}>
                 {todos.map((todo) => (
