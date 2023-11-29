@@ -9,6 +9,7 @@ i18n.use(initReactI18next)
                     title: 'Todo-list application',
                     toDo: 'New todo',
                     edit: 'Edit',
+                    placeholder: 'Enter your daily tasks!',
                 },
             },
             ar: {
@@ -16,6 +17,7 @@ i18n.use(initReactI18next)
                     title: 'قائمة المهام اليومية',
                     toDo: 'مهمة جديدة',
                     edit: 'تعديل',
+                    placeholder: 'ادخل مهامك اليومية!',
                 },
             },
         },

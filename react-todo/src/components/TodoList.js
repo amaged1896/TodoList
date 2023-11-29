@@ -69,7 +69,7 @@ const TodoList = () => {
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            e.preventDefault(); // Prevent the default Enter key behavior
+            e.preventDefault();
             if (editingTodo) {
                 handleUpdate();
             } else {
@@ -84,16 +84,37 @@ const TodoList = () => {
         i18n.changeLanguage(newLanguage);
     };
 
-
     return (
-        <TodoListContainer elevation={3}>
+        <TodoListContainer elevation={3} >
             <Button variant="outlined" onClick={toggleLanguage}>
                 {i18n.language === 'en' ? 'عربي' : 'English'}
             </Button>
-            <Typography variant="h5" gutterBottom>
+            <Typography dir={i18n.language === "ar" ? "rtl" : "ltr"} variant="h5" gutterBottom>
                 {t('title')}
             </Typography>
             <TodoInput
+                dir={i18n.language === "ar" ? "rtl" : "ltr"}
+                label={editingTodo ? t('edit') : t('toDo')}
+                placeholder={t('placeholder')}
+                style={{ textAlign: i18n.language === "ar" ? "right" : "left" }}
+                variant="outlined"
+                value={inputText}
+                rules={{ required: 'Todo text is required' }}
+                onChange={(e) => setInputText(e.target.value)}
+                onKeyDown={handleKeyPress}
+                InputProps={{
+                    endAdornment: (
+                        <div style={{ position: 'absolute', right: 0 }}>
+                            <IconButton onClick={editingTodo ? handleUpdate : handleAddTodo}>
+                                {editingTodo ? <EditIcon /> : <AddIcon />}
+                            </IconButton>
+                        </div>
+                    ),
+                }}
+            />
+
+
+            {/* <TodoInput dir={i18n.language === "ar" ? "rtl" : "ltr"}
                 label={editingTodo ? t('edit') : t('toDo')}
                 variant="outlined"
                 value={inputText}
@@ -102,16 +123,16 @@ const TodoList = () => {
                 onKeyDown={handleKeyPress}
                 InputProps={{
                     endAdornment: (
-                        <InputAdornment position="end">
+                        <InputAdornment position="end" dir={i18n.language === "ar" ? "rtl" : "ltr"} >
                             <IconButton onClick={editingTodo ? handleUpdate : handleAddTodo}>
                                 {editingTodo ? <EditIcon /> : <AddIcon />}
                             </IconButton>
                         </InputAdornment>
                     ),
                 }}
-            />
+            /> */}
 
-            <List>
+            <List dir={i18n.language === "ar" ? "rtl" : "ltr"}>
                 {todos.map((todo) => (
                     <ListItem
                         key={todo.id}
