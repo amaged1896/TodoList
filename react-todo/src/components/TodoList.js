@@ -11,10 +11,14 @@ import {
     InputAdornment,
     Paper,
     styled,
+    Typography,
+    Button,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n.js';
 
 const TodoInput = styled(TextField)({
     width: '100%',
@@ -33,6 +37,7 @@ const TodoList = () => {
     const dispatch = useDispatch();
     const [editingTodo, setEditingTodo] = useState(null);
     const [inputText, setInputText] = useState('');
+    const { t } = useTranslation();
 
     const handleToggle = (id) => {
         dispatch(toggleTodo(id));
@@ -48,7 +53,7 @@ const TodoList = () => {
     };
 
     const handleUpdate = () => {
-        if (editingTodo && inputText.trim() !== '') {
+        if (editingTodo && inputText !== '') {
             dispatch(updateTodo({ id: editingTodo.id, text: inputText }));
             setEditingTodo(null);
             setInputText('');
@@ -56,7 +61,7 @@ const TodoList = () => {
     };
 
     const handleAddTodo = () => {
-        if (inputText.trim() !== '') {
+        if (inputText !== '') {
             dispatch(addTodo(inputText));
             setInputText('');
         }
@@ -73,12 +78,26 @@ const TodoList = () => {
         }
     };
 
+
+    const toggleLanguage = () => {
+        const newLanguage = i18n.language === 'en' ? 'ar' : 'en';
+        i18n.changeLanguage(newLanguage);
+    };
+
+
     return (
         <TodoListContainer elevation={3}>
+            <Button variant="outlined" onClick={toggleLanguage}>
+                {i18n.language === 'en' ? 'عربي' : 'English'}
+            </Button>
+            <Typography variant="h5" gutterBottom>
+                {t('title')}
+            </Typography>
             <TodoInput
-                label={editingTodo ? 'Edit todo' : 'Add a new todo'}
+                label={editingTodo ? t('edit') : t('toDo')}
                 variant="outlined"
                 value={inputText}
+                rules={{ required: 'Todo text is required' }}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={handleKeyPress}
                 InputProps={{
