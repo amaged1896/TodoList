@@ -1,4 +1,3 @@
-// src/components/TodoList.js
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTodo, deleteTodo, updateTodo, addTodo } from '../redux/todosSlice';
@@ -97,8 +96,7 @@ const TodoList = () => {
                 {todos.map((todo) => (
                     <ListItem
                         key={todo.id}
-                        style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-                    >
+                        style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
                         <Checkbox checked={todo.completed} onChange={() => handleToggle(todo.id)} />
                         <ListItemText primary={todo.text} />
                         <IconButton onClick={() => handleEdit(todo.id, todo.text)}>
